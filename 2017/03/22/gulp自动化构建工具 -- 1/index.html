@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon">
+  <meta name="author" content="luoyanming">
+  <meta name="email" content="13575458746@163.com">
+  <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
+  <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
+  
+  <title>gulp自动化构建工具 -- 1 | Luoym</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/luoym.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+        <a href="/" class="logo clearfix">
+            <i></i>
+            <p>
+                <span class="iconfont icon-l"></span>
+                <span class="iconfont icon-u"></span>
+                <span class="iconfont icon-o"></span>
+            </p>
+        </a>
+        <a href="javascript:void(0);" class="btn-nav">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar">
+    <div class="container">
+        <ul class="clearfix">
+            
+            <li>
+                <a href="/">
+                    <p>Home</p>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <p>Archives</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+  <section class="main-wrap">
+    <div class="container clearfix">
+      <main class="content">
+        <article id="post-gulp自动化构建工具 -- 1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gulp自动化构建工具 -- 1
+    </h1>
+  
+
+        <a href="/2017/03/22/gulp自动化构建工具 -- 1/" class="article-date">
+  <time datetime="2017-03-22T07:32:18.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>刚搭建好 <code>Github Pages</code>，第一篇博客就从 <code>gulp</code> 开始吧！</p>
+<p><code>gulp</code> 是前端开发过程中对代码进行构建的工具，基于 <code>Nodejs</code>，能快速方便的对 <code>html</code>、<code>javascript</code>、<code>css</code>、<code>sass</code>、<code>less</code>、<code>image</code> 等进行检查、压缩、格式化、混淆、拷贝、合并等操作。<br><a id="more"></a><br><code>gulp</code> 和 <code>grunt</code> 非常类似，个人感觉 <code>gulp</code> 使用起来比 <code>grunt</code> 要简单粗暴，代码书写也更简洁易懂。废话不多说，下面开始正戏：</p>
+<h2 id="1、安装-Nodejs"><a href="#1、安装-Nodejs" class="headerlink" title="1、安装 Nodejs"></a>1、安装 <code>Nodejs</code></h2><p>戳这里：<a href="#">Nodejs 的安装与配置</a></p>
+<h2 id="2、全局安装-gulp"><a href="#2、全局安装-gulp" class="headerlink" title="2、全局安装 gulp"></a>2、全局安装 <code>gulp</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp -g</div></pre></td></tr></table></figure>
+<p>执行 <code>gulp -v</code> 查看版本号，<code>version 3.9.1</code> 显示版本号即为安装成功。</p>
+<h2 id="3、新建-package-json"><a href="#3、新建-package-json" class="headerlink" title="3、新建 package.json"></a>3、新建 <code>package.json</code></h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"luoym"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</div><div class="line">  <span class="attr">"homepage"</span>: <span class="string">""</span>,</div><div class="line">  <span class="attr">"author"</span>: &#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"luoym"</span>,</div><div class="line">    <span class="attr">"email"</span>: <span class="string">"13575458746@163.com"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</div><div class="line">  <span class="attr">"devDependencies"</span>: &#123;</div><div class="line">    <span class="attr">"gulp"</span>: <span class="string">"^3.9.1"</span>,</div><div class="line">    <span class="attr">"gulp-clean-css"</span>: <span class="string">"^2.0.13"</span>,</div><div class="line">    <span class="attr">"gulp-connect"</span>: <span class="string">"^5.0.0"</span>,</div><div class="line">    <span class="attr">"gulp-header"</span>: <span class="string">"^1.8.8"</span>,</div><div class="line">    <span class="attr">"gulp-livereload"</span>: <span class="string">"^3.8.1"</span>,</div><div class="line">    <span class="attr">"gulp-notify"</span>: <span class="string">"^2.2.0"</span>,</div><div class="line">    <span class="attr">"gulp-plumber"</span>: <span class="string">"^1.1.0"</span>,</div><div class="line">    <span class="attr">"gulp-sass"</span>: <span class="string">"^2.3.2"</span>,</div><div class="line">    <span class="attr">"gulp-uglify"</span>: <span class="string">"^2.0.0"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这是已有项目的 <code>package.json</code>，如果你也有配置好的 <code>package.json</code>，命令行的输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
+<p>系统就会自动安装 <code>devDependencies</code> 里面所列的插件。</p>
+<p>当然，我们要讲的是从头开始，新建好 <code>package.json</code> 后，<code>devDependencies</code> 里面是空的。首先，我们要先在项目本地安装 <code>gulp</code>，是的，没搞错， <code>gulp</code> 全局要安装，本地也要安装。进入 <code>package.json</code> 所在目录，命令行的输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp --save-dev</div></pre></td></tr></table></figure></p>
+<p><code>-g</code> 是全局安装 <code>--save-dev</code> 是本地安装。</p>
+<p>如果安装完成，命令行工具显示如下信息：<br><img src="/assets/images/gulp-1.png" alt="gulp-1.png"><br>你会发现目录下面多了一个 <code>node_modules</code> 文件夹，里面存放的就是本地安装的插件</p>
+<h2 id="4、新建-gulpfile-js"><a href="#4、新建-gulpfile-js" class="headerlink" title="4、新建 gulpfile.js"></a>4、新建 <code>gulpfile.js</code></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//引入插件</span></div><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</div><div class="line"></div><div class="line"><span class="comment">//创建 gulp 任务</span></div><div class="line">gulp.task(<span class="string">'copy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'dev/webapp/**/*.html'</span>)</div><div class="line">         .pipe(gulp.dest(<span class="string">'build/webapp'</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>copy</code> 任务的作用是将 <code>dev/webapp/</code> 内的所有 <code>html</code> 文件拷贝到 <code>build/webapp</code> 内。再输入：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'copy'</span>]);</div></pre></td></tr></table></figure></p>
+<p>进行到这一步，项目结构应该是这样的：<br><img src="/assets/images/gulp-2.png" alt="gulp-2.png"><br>接下去，再命令行工具中我们可以来执行 <code>gulp</code> 任务，输入 <code>gulp</code> 或者 <code>gulp default</code>：<br><img src="/assets/images/gulp-3.png" alt="gulp-3.png"><br><img src="/assets/images/gulp-4.png" alt="gulp-4.png"><br>至此，一个最简单的 <code>gulp</code> 工具就搭建好了。是不是很简单？</p>
+<p>下一章将继续深入探讨 <code>gulp</code> 的一些插件 <code>plugin</code>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+  </div>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/22/gulp自动化构建工具 -- 2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">gulp自动化构建工具 -- 2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+      </main>
+      
+      
+        <aside class="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Frontend/">Frontend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sass/">sass</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/22/gulp自动化构建工具 -- 1/">gulp自动化构建工具 -- 1</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/22/gulp自动化构建工具 -- 2/">gulp自动化构建工具 -- 2</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container clearfix">
+        <div class="widget">
+            <h3>快速导航</h3>
+            <div class="links">
+                <a href="javascript:void(0);">HTML5中国</a>
+                <a href="javascript:void(0);">Bootstrap</a>
+                <a href="javascript:void(0);">ECharts</a>
+                <a href="javascript:void(0);">开发头条</a>
+                <a href="javascript:void(0);">TinyPNG</a>
+                <a href="javascript:void(0);">JSON校验</a>
+                <a href="javascript:void(0);">SegmentFault</a>
+                <a href="javascript:void(0);">在线Api</a>
+                <a href="javascript:void(0);">掘金</a>
+                <a href="javascript:void(0);">前端圈</a>
+                <a href="javascript:void(0);">前端里</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="copyright">
+            <p>Copyright&nbsp;&copy;&nbsp;<span class="iconfont icon-l"></span><span class="iconfont icon-u"></span><span class="iconfont icon-o"></span></p>
+            <p><i class="iconfont icon-wsmp-icprecord"></i>浙ICP备16021390号-1</p>
+            <p><i class="iconfont icon-gonganbeian"></i>浙公网安备33010502003302</p>
+        </div>
+
+    </div>
+</footer>
+  <script src="/js/zepto.min.js"></script>
+<script src="/js/luoym.js"></script>
+
+
+</body>
+</html>
