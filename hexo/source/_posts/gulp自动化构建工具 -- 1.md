@@ -4,7 +4,7 @@ date: 2017-03-22 15:32:18
 categories:
     - Frontend
 tags:
-    - gulp
+    - Gulp
 ---
 
 刚搭建好 `Github Pages`，第一篇博客就从 `gulp` 开始吧！

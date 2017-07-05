@@ -4,7 +4,7 @@ date: 2017-03-22 17:32:18
 categories:
     - Frontend
 tags:
-    - gulp
+    - Gulp
 ---
 
 上一章我们已经了解了 `gulp` 安装和配置，本章节将继续深入，讲解 `gulp` 一些常用插件 `gulp-clean-css`、`gulp-uglify`、`gulp-header`、`gulp-notify`、`gulp-plumber` 的运用。

@@ -4,7 +4,7 @@ date: 2017-03-23 11:12:00
 categories:
     - Frontend
 tags:
-    - gulp
+    - Gulp
 ---
 
 上一章了解了 `gulp` 一些常用插件，本章将讲解让 `gulp` 自动化的方法。有两个插件必不可少：`gulp-livereload` `gulp-connect`。
