@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon">
+  <meta name="author" content="luoyanming">
+  <meta name="email" content="13575458746@163.com">
+  <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
+  <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
+  
+  <title>获取URL地址上的参数 | Luoym</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/luoym.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+        <a href="/" class="logo clearfix">
+            <i></i>
+            <p>
+                <span class="iconfont icon-l"></span>
+                <span class="iconfont icon-u"></span>
+                <span class="iconfont icon-o"></span>
+            </p>
+        </a>
+        <a href="javascript:void(0);" class="btn-nav">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar">
+    <div class="container">
+        <ul class="clearfix">
+            
+            <li>
+                <a href="/">
+                    <p>Home</p>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <p>Archives</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+  <section class="main-wrap">
+    <div class="container clearfix">
+      <main class="content">
+        <article id="post-获取URL地址上的参数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      获取URL地址上的参数
+    </h1>
+  
+
+        <a href="/2017/04/01/获取URL地址上的参数/" class="article-date">
+  <time datetime="2017-04-01T03:28:00.000Z" itemprop="datePublished">2017-04-01</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>获取 <code>URL</code> 参数<br><a id="more"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// func</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getQueryString</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^|&amp;)"</span> + name + <span class="string">"=([^&amp;]*)(&amp;|$)"</span>, <span class="string">"i"</span>),</div><div class="line">      r = <span class="built_in">window</span>.location.search.substr(<span class="number">1</span>).match(reg);</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (r != <span class="literal">null</span>) <span class="keyword">return</span> <span class="built_in">unescape</span>(r[<span class="number">2</span>]); <span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 当前地址：http://www.luoym.com/news.html?id=1&amp;category=2</span></div><div class="line">getQueryString(<span class="string">'id'</span>);  <span class="comment">// 1</span></div><div class="line">getQueryString(<span class="string">'category'</span>);  <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+  </div>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/URL/">URL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/02/模拟Ajax Post提交/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          模拟Ajax Post提交
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/23/gulp自动化构建工具 -- 4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">gulp自动化构建工具 -- 4</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+      </main>
+      
+      
+        <aside class="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Frontend/">Frontend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/">Canvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Date/">Date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/">Document</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Explorer/">Explorer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Form/">Form</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrollbar/">Scrollbar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Text/">Text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Upload/">Upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Websocket/">Websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/14/mac下自定义命令/">Mac下自定义命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/11/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/09/文字无缝滚动/">文字无缝滚动跑马灯效果</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/31/获取浏览器窗口大小/">javascript学习003 -- 浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/26/Javascript学习002 -- array/">Javascript学习002 -- array</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container clearfix">
+        <div class="widget">
+            <h3>快速导航</h3>
+            <div class="links">
+                <a href="javascript:void(0);">HTML5中国</a>
+                <a href="javascript:void(0);">Bootstrap</a>
+                <a href="javascript:void(0);">ECharts</a>
+                <a href="javascript:void(0);">开发头条</a>
+                <a href="javascript:void(0);">TinyPNG</a>
+                <a href="javascript:void(0);">JSON校验</a>
+                <a href="javascript:void(0);">SegmentFault</a>
+                <a href="javascript:void(0);">在线Api</a>
+                <a href="javascript:void(0);">掘金</a>
+                <a href="javascript:void(0);">前端圈</a>
+                <a href="javascript:void(0);">前端里</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="copyright">
+            <p>Copyright&nbsp;&copy;&nbsp;<span class="iconfont icon-l"></span><span class="iconfont icon-u"></span><span class="iconfont icon-o"></span></p>
+            <p><i class="iconfont icon-wsmp-icprecord"></i>浙ICP备16021390号-1</p>
+            <p><i class="iconfont icon-gonganbeian"></i>浙公网安备33010502003302</p>
+        </div>
+
+    </div>
+</footer>
+  <script src="/js/zepto.min.js"></script>
+<script src="/js/luoym.js"></script>
+
+
+</body>
+</html>

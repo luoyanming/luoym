@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon">
+  <meta name="author" content="luoyanming">
+  <meta name="email" content="13575458746@163.com">
+  <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
+  <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
+  
+  <title>跨域 | Luoym</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/luoym.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+        <a href="/" class="logo clearfix">
+            <i></i>
+            <p>
+                <span class="iconfont icon-l"></span>
+                <span class="iconfont icon-u"></span>
+                <span class="iconfont icon-o"></span>
+            </p>
+        </a>
+        <a href="javascript:void(0);" class="btn-nav">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar">
+    <div class="container">
+        <ul class="clearfix">
+            
+            <li>
+                <a href="/">
+                    <p>Home</p>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <p>Archives</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+  <section class="main-wrap">
+    <div class="container clearfix">
+      <main class="content">
+        <article id="post-跨域" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      跨域
+    </h1>
+  
+
+        <a href="/2017/07/06/跨域/" class="article-date">
+  <time datetime="2017-07-06T01:48:00.000Z" itemprop="datePublished">2017-07-06</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当需要访问其他服务器的数据或者前后端分离开发对接数据的时候，我们会碰到跨域问题。那什么是跨域？又该如何解决呢？<br><a id="more"></a></p>
+<h2 id="1、什么是跨域"><a href="#1、什么是跨域" class="headerlink" title="1、什么是跨域"></a>1、什么是跨域</h2><p>浏览器有个最核心最基本的安全功能 – 同源策略。同源指的是：域名、协议、端口均相同。否则，浏览器会报错：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No <span class="string">'Access-Control-Allow-Origin'</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">A: <span class="string">'http://m.luoym.com/article/a.js'</span></div><div class="line">B: <span class="string">'http://m.luoym.com/product/b.js'</span></div><div class="line"><span class="comment">// 允许访问。    同一域名下（不同文件夹）。</span></div><div class="line"></div><div class="line">A: <span class="string">'http://m.luoym.com:8080/a.js'</span></div><div class="line">B: <span class="string">'http://m.luoym.com:8081/b.js'</span></div><div class="line"><span class="comment">// 不允许访问。    端口不同。</span></div><div class="line"></div><div class="line">A: <span class="string">'http://m.luoym.com/a.js'</span></div><div class="line">B: <span class="string">'http://116.65.90/b.js'</span></div><div class="line"><span class="comment">// 不允许访问。    域名及其对应的ip地址。</span></div><div class="line"></div><div class="line">A: <span class="string">'http://m.luoym.com/a.js'</span></div><div class="line">B: <span class="string">'http://www.luoym.com/b.js'</span></div><div class="line"><span class="comment">// 不允许访问。    主域名相同，但子域名不同。</span></div><div class="line"></div><div class="line">A: <span class="string">'http://m.luoym.com/a.js'</span></div><div class="line">B: <span class="string">'http://luoym.com/b.js'</span></div><div class="line"><span class="comment">// 不允许访问。    主域名相同，但子域名不同。</span></div><div class="line"></div><div class="line">A: <span class="string">'http://m.luoym.com/a.js'</span></div><div class="line">B: <span class="string">'https://m.luoym.com/b.js'</span></div><div class="line"><span class="comment">// 不允许访问。    协议不同。</span></div><div class="line"></div><div class="line">A: <span class="string">'http://m.luoym.com/a.js'</span></div><div class="line">B: <span class="string">'http://m.luoyanming.com/b.js'</span></div><div class="line"><span class="comment">// 不允许访问。    域名不同。</span></div></pre></td></tr></table></figure>
+<p>如果是协议和端口号不同造成的跨域问题，前端是没办法解决的。<br><code>script</code>、<code>img</code>、<code>iframe</code> 标签不受同源策略影响。</p>
+<h2 id="2、解决跨域问题的方法"><a href="#2、解决跨域问题的方法" class="headerlink" title="2、解决跨域问题的方法"></a>2、解决跨域问题的方法</h2><h3 id="1-、JSONP"><a href="#1-、JSONP" class="headerlink" title="(1)、JSONP"></a>(1)、JSONP</h3><p>用户传递一个 <code>callback</code> 给服务端，然后服务端将JSON数据当做参数传入 <code>callback</code>，当用户接收到请求响应时，当前页面会调用 <code>callback</code> 函数，从而拿到需要的JSON数据。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleResponse</span>(<span class="params">res</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'The response data is'</span>: res.data);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">script.src = <span class="string">'http://www.luoym.com/news?callback=handleResponse'</span>;</div><div class="line"><span class="built_in">document</span>.body.insertBefore(script, <span class="built_in">document</span>.body.firstChild);</div><div class="line"></div><div class="line"><span class="comment">// handleResponse(&#123;"people": [&#123;"name":"luoym","age":"28"&#125;]&#125;);</span></div></pre></td></tr></table></figure></p>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><ol>
+<li>我们创建一个 <code>script</code> 标签去请求</li>
+<li>服务端根据参数 <code>json</code> <code>handleResponse</code></li>
+<li>生成相应的 <code>json</code> 数据 <code>handleResponse({&quot;people&quot;: [{&quot;name&quot;:&quot;luoym&quot;,&quot;age&quot;:&quot;28&quot;}]});</code></li>
+<li>当前页面接收到请求响应的时候，会去执行这个数据</li>
+<li>跨域通信完成</li>
+</ol>
+<h4 id="注意的点："><a href="#注意的点：" class="headerlink" title="注意的点："></a>注意的点：</h4><ol>
+<li><code>JSONP</code> 只支持 <code>GET</code> 请求；</li>
+<li><code>Response Headers</code> 中的 <code>Content-Type</code> 需要指定为 <code>application/json</code>;</li>
+</ol>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>不安全，易被篡改页面内容，截获敏感数据</li>
+</ol>
+<p><code>jQuery Ajax</code> 写法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">  <span class="attr">type</span>: <span class="string">"get"</span>, <span class="comment">// 指定请求方式</span></div><div class="line">  url: <span class="string">"http://www.luoym.com/news"</span>,</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line"></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">dataType</span>: <span class="string">"jsonp"</span>, <span class="comment">// 指定数据格式 jsonp</span></div><div class="line">  jsonp: <span class="string">"callback"</span>, <span class="comment">// 指定回调函数</span></div><div class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</div><div class="line"></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">error</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  </div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="2-、window-name"><a href="#2-、window-name" class="headerlink" title="(2)、window.name"></a>(2)、window.name</h3><p><code>window</code>  对象的 <code>name</code> 属性是一个很特别的属性，当该 <code>window</code> 的 <code>location</code> 变化，然后重新加载，它的 <code>name</code> 属性可以依然保持不变。那么我们可以在页面 A 中用 <code>iframe</code> 加载其他域的页面 B，而页面 B 中用 <code>JavaScript</code> 把需要传递的数据赋值给 <code>window.name</code>，<code>iframe</code>加载完成之后 <code>（iframe.onload）</code>，页面 A 修改 <code>iframe</code> 的地址，将其变成同域的一个地址，然后就可以读出 <code>iframe</code> 的 <code>window.name</code> 的值了（因为 A 中的 <code>window.name</code> 和 <code>iframe</code> 中的 <code>window.name</code> 互相独立的，所以不能直接在 A 中获取 <code>window.name</code>，而要通过 <code>iframe</code> 获取其 <code>window.name</code>）。这个方式非常适合单向的数据请求，而且协议简单、安全。不会像 <code>JSONP</code> 那样不做限制地执行外部脚本。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建 http://m.luoym.com/a.html</span></div><div class="line"><span class="comment">// 创建 http://www.luoym.com/b.html</span></div><div class="line"></div><div class="line"><span class="comment">// a.html</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">proxy</span>(<span class="params">url, func</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> isFirst = <span class="literal">true</span>,</div><div class="line">      ifr = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>),</div><div class="line"></div><div class="line">  loadFunc = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(isFirst) &#123;</div><div class="line">      ifr.contentWindow.location = <span class="string">'http://www.luoym.com/b.html'</span>;</div><div class="line">      isFirst = <span class="literal">false</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      func(ifr.contentWindow.name);</div><div class="line">      ifr.contentWindow.close();</div><div class="line">      <span class="built_in">document</span>.body.removeChild(ifr);</div><div class="line">      ifr.src = <span class="string">''</span>;</div><div class="line">      ifr = <span class="literal">null</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  ifr.src = url;</div><div class="line">  ifr.style.display = <span class="string">'none'</span>;</div><div class="line">  <span class="keyword">if</span>(ifr.attachEvent) &#123;</div><div class="line">    ifr.attachEvent(<span class="string">'onload'</span>, loadFunc);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    ifr.onload = loadFunc;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line">&#125;</div><div class="line"></div><div class="line">proxy(<span class="string">'http://www.luoym.com/b.html'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(data);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// b.html</span></div><div class="line"><span class="built_in">window</span>.name = <span class="string">'要传送的内容'</span>;</div></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+  </div>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSONP/">JSONP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/11/Javascript学习001 -- script元素/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Javascript学习001 -- script元素
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/30/JSON和JSON格式字符串相互转化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JSON和JSON格式字符串相互转化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+      </main>
+      
+      
+        <aside class="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Frontend/">Frontend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/">Canvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Date/">Date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/">Document</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Explorer/">Explorer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Form/">Form</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrollbar/">Scrollbar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Text/">Text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Upload/">Upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Websocket/">Websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/14/mac下自定义命令/">Mac下自定义命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/11/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/09/文字无缝滚动/">文字无缝滚动跑马灯效果</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/31/获取浏览器窗口大小/">javascript学习003 -- 浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/26/Javascript学习002 -- array/">Javascript学习002 -- array</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container clearfix">
+        <div class="widget">
+            <h3>快速导航</h3>
+            <div class="links">
+                <a href="javascript:void(0);">HTML5中国</a>
+                <a href="javascript:void(0);">Bootstrap</a>
+                <a href="javascript:void(0);">ECharts</a>
+                <a href="javascript:void(0);">开发头条</a>
+                <a href="javascript:void(0);">TinyPNG</a>
+                <a href="javascript:void(0);">JSON校验</a>
+                <a href="javascript:void(0);">SegmentFault</a>
+                <a href="javascript:void(0);">在线Api</a>
+                <a href="javascript:void(0);">掘金</a>
+                <a href="javascript:void(0);">前端圈</a>
+                <a href="javascript:void(0);">前端里</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="copyright">
+            <p>Copyright&nbsp;&copy;&nbsp;<span class="iconfont icon-l"></span><span class="iconfont icon-u"></span><span class="iconfont icon-o"></span></p>
+            <p><i class="iconfont icon-wsmp-icprecord"></i>浙ICP备16021390号-1</p>
+            <p><i class="iconfont icon-gonganbeian"></i>浙公网安备33010502003302</p>
+        </div>
+
+    </div>
+</footer>
+  <script src="/js/zepto.min.js"></script>
+<script src="/js/luoym.js"></script>
+
+
+</body>
+</html>

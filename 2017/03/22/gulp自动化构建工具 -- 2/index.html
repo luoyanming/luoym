@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon">
+  <meta name="author" content="luoyanming">
+  <meta name="email" content="13575458746@163.com">
+  <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
+  <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
+  
+  <title>gulp自动化构建工具 -- 2 | Luoym</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/luoym.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+        <a href="/" class="logo clearfix">
+            <i></i>
+            <p>
+                <span class="iconfont icon-l"></span>
+                <span class="iconfont icon-u"></span>
+                <span class="iconfont icon-o"></span>
+            </p>
+        </a>
+        <a href="javascript:void(0);" class="btn-nav">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar">
+    <div class="container">
+        <ul class="clearfix">
+            
+            <li>
+                <a href="/">
+                    <p>Home</p>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <p>Archives</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+  <section class="main-wrap">
+    <div class="container clearfix">
+      <main class="content">
+        <article id="post-gulp自动化构建工具 -- 2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gulp自动化构建工具 -- 2
+    </h1>
+  
+
+        <a href="/2017/03/22/gulp自动化构建工具 -- 2/" class="article-date">
+  <time datetime="2017-03-22T09:32:18.000Z" itemprop="datePublished">2017-03-22</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一章我们已经了解了 <code>gulp</code> 安装和配置，本章节将继续深入，讲解 <code>gulp</code> 一些常用插件 <code>gulp-clean-css</code>、<code>gulp-uglify</code>、<code>gulp-header</code>、<code>gulp-notify</code>、<code>gulp-plumber</code> 的运用。<br><a id="more"></a></p>
+<h2 id="1、基本作用介绍"><a href="#1、基本作用介绍" class="headerlink" title="1、基本作用介绍"></a>1、基本作用介绍</h2><ol>
+<li><code>gulp-clean-css</code> ：压缩css文件，不推荐使用 <code>gulp-minify-css</code></li>
+<li><code>gulp-uglify</code> ：压缩js文件，减小文件体积</li>
+<li><code>gulp-header</code> ：在文件头部添加注释信息</li>
+<li><code>gulp-notify</code> ：在控制台中添加文字描述</li>
+<li><code>gulp-plumber</code> ：执行 <code>gulp</code> 任务时显示报错信息，且不终止当前任务</li>
+</ol>
+<h2 id="2、安装-plugin"><a href="#2、安装-plugin" class="headerlink" title="2、安装 plugin"></a>2、安装 <code>plugin</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-clean-css gulp-uglify gulp-header gulp-notify gulp-plumber --save-dev</div></pre></td></tr></table></figure>
+<h2 id="3、创建任务-task"><a href="#3、创建任务-task" class="headerlink" title="3、创建任务 task"></a>3、创建任务 <code>task</code></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>),</div><div class="line">    cleancss = <span class="built_in">require</span>(<span class="string">'gulp-clean-css'</span>),</div><div class="line">    uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>),</div><div class="line">    header = <span class="built_in">require</span>(<span class="string">'gulp-header'</span>),</div><div class="line">    notify = <span class="built_in">require</span>(<span class="string">'gulp-notify'</span>),</div><div class="line">    plumber = <span class="built_in">require</span>(<span class="string">'gulp-plumber'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 获取 package.json 内的信息</span></div><div class="line"><span class="keyword">var</span> pkg = <span class="built_in">require</span>(<span class="string">'./package.json'</span>),</div><div class="line">    notes = [<span class="string">'/**'</span>,</div><div class="line">    <span class="string">' * @author &lt;%= pkg.author.name %&gt;'</span>,</div><div class="line">    <span class="string">' * @email &lt;%= pkg.author.email %&gt;'</span>,</div><div class="line">    <span class="string">' * @descrip &lt;%= pkg.description %&gt;'</span>,</div><div class="line">    <span class="string">' * @version v&lt;%= pkg.version %&gt;'</span>,</div><div class="line">    <span class="string">' */'</span>,</div><div class="line">    <span class="string">''</span>].join(<span class="string">'\n'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 拷贝 html</span></div><div class="line">gulp.task(<span class="string">'copyhtml'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'dev/**/*.html'</span>)</div><div class="line">        .pipe(gulp.dest(<span class="string">'build'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 拷贝 min.js</span></div><div class="line">gulp.task(<span class="string">'copyjs'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'dev/**/*.min.js'</span>)</div><div class="line">        .pipe(gulp.dest(<span class="string">'build'</span>))</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 拷贝 images</span></div><div class="line">gulp.task(<span class="string">'copyimages'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'dev/**/*.&#123;png,jpg,gif,svg,ico&#125;'</span>)</div><div class="line">        .pipe(gulp.dest(<span class="string">'build'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 压缩 css, 添加头部注释信息</span></div><div class="line">gulp.task(<span class="string">'cleancss'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> gulp.src(<span class="string">'dev/**/*.css'</span>)</div><div class="line">        .pipe(plumber(&#123;<span class="attr">errorHandler</span>: notify.onError(<span class="string">'Error: &lt;%= error.message %&gt;'</span>)&#125;))</div><div class="line">        .pipe(cleancss())</div><div class="line">        .pipe(header(notes, &#123; <span class="attr">pkg</span> : pkg &#125; ))</div><div class="line">        .pipe(gulp.dest(<span class="string">'build'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 压缩 js, 添加头部注释信息</span></div><div class="line">gulp.task(<span class="string">'uglifyjs'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> gulp.src([<span class="string">'dev/**/*.js'</span>, <span class="string">'!dev/**/*.min.js'</span>])</div><div class="line">        .pipe(plumber(&#123;<span class="attr">errorHandler</span>: notify.onError(<span class="string">'Error: &lt;%= error.message %&gt;'</span>)&#125;))</div><div class="line">        .pipe(uglify(&#123;</div><div class="line">          <span class="attr">mangle</span>: &#123;<span class="attr">except</span>: [<span class="string">'require'</span> ,<span class="string">'exports'</span> ,<span class="string">'module'</span> ,<span class="string">'$'</span>]&#125;</div><div class="line">        &#125;))</div><div class="line">        .pipe(header(notes, &#123; <span class="attr">pkg</span> : pkg &#125; ))</div><div class="line">        .pipe(gulp.dest(<span class="string">'build'</span>));</div><div class="line">&#125;);</div><div class="line"></div><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'copyhtml'</span>, <span class="string">'copyjs'</span>, <span class="string">'copyimages'</span>, <span class="string">'cleancss'</span>, <span class="string">'uglifyjs'</span>]);</div></pre></td></tr></table></figure>
+<p><code>images</code> 此处只是简单的进行了拷贝，并没有用 <code>gulp-imagemin</code> 进行压缩（本人网络不好，下载不下来，很痛苦，大家有需求自己添加，用法跟 <code>gulp-uglify</code> 一致）。<br>顺便推荐大家一个压缩 <code>jpg</code> <code>png</code> 的网站，非常好用：<a href="https://tinypng.com/">Tinypng.com</a></p>
+<h2 id="4、运行"><a href="#4、运行" class="headerlink" title="4、运行"></a>4、运行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp</div></pre></td></tr></table></figure>
+<p>大功告成！</p>
+<p>本章讲解了几个常用 <code>plugin</code>，操作一遍后应该对 <code>gulp</code> 有了更深的了解。”自动化构建工具” “构建” 两个字貌似实现了，但是”自动化”还没见到。每次修改文件要在浏览器上查看的时候都需要手动 <code>gulp</code> 运行任务，非常麻烦。怎么解决？请看下一章。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+  </div>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gulp/">Gulp</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/23/gulp自动化构建工具 -- 3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          gulp自动化构建工具 -- 3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/22/gulp自动化构建工具 -- 1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">gulp自动化构建工具 -- 1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+      </main>
+      
+      
+        <aside class="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Frontend/">Frontend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/">Canvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Date/">Date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/">Document</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Explorer/">Explorer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Form/">Form</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrollbar/">Scrollbar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Text/">Text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Upload/">Upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Websocket/">Websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/14/mac下自定义命令/">Mac下自定义命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/11/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/09/文字无缝滚动/">文字无缝滚动跑马灯效果</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/31/获取浏览器窗口大小/">javascript学习003 -- 浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/26/Javascript学习002 -- array/">Javascript学习002 -- array</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container clearfix">
+        <div class="widget">
+            <h3>快速导航</h3>
+            <div class="links">
+                <a href="javascript:void(0);">HTML5中国</a>
+                <a href="javascript:void(0);">Bootstrap</a>
+                <a href="javascript:void(0);">ECharts</a>
+                <a href="javascript:void(0);">开发头条</a>
+                <a href="javascript:void(0);">TinyPNG</a>
+                <a href="javascript:void(0);">JSON校验</a>
+                <a href="javascript:void(0);">SegmentFault</a>
+                <a href="javascript:void(0);">在线Api</a>
+                <a href="javascript:void(0);">掘金</a>
+                <a href="javascript:void(0);">前端圈</a>
+                <a href="javascript:void(0);">前端里</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="copyright">
+            <p>Copyright&nbsp;&copy;&nbsp;<span class="iconfont icon-l"></span><span class="iconfont icon-u"></span><span class="iconfont icon-o"></span></p>
+            <p><i class="iconfont icon-wsmp-icprecord"></i>浙ICP备16021390号-1</p>
+            <p><i class="iconfont icon-gonganbeian"></i>浙公网安备33010502003302</p>
+        </div>
+
+    </div>
+</footer>
+  <script src="/js/zepto.min.js"></script>
+<script src="/js/luoym.js"></script>
+
+
+</body>
+</html>

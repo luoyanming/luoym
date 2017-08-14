@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon">
+  <meta name="author" content="luoyanming">
+  <meta name="email" content="13575458746@163.com">
+  <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
+  <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
+  
+  <title>带progress的FormData文件上传 | Luoym</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/luoym.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+        <a href="/" class="logo clearfix">
+            <i></i>
+            <p>
+                <span class="iconfont icon-l"></span>
+                <span class="iconfont icon-u"></span>
+                <span class="iconfont icon-o"></span>
+            </p>
+        </a>
+        <a href="javascript:void(0);" class="btn-nav">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar">
+    <div class="container">
+        <ul class="clearfix">
+            
+            <li>
+                <a href="/">
+                    <p>Home</p>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <p>Archives</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+  <section class="main-wrap">
+    <div class="container clearfix">
+      <main class="content">
+        <article id="post-带progress的FormData文件上传" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      带progress的FormData文件上传
+    </h1>
+  
+
+        <a href="/2017/04/12/带progress的FormData文件上传/" class="article-date">
+  <time datetime="2017-04-12T07:00:00.000Z" itemprop="datePublished">2017-04-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本章介绍利用 <code>$.ajax</code> 和 <code>FormData</code> 上传文件，并显示上传进度 <code>progress</code>。<br><a id="more"></a></p>
+<h2 id="1、HTML-结构"><a href="#1、HTML-结构" class="headerlink" title="1、HTML 结构"></a>1、<code>HTML</code> 结构</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// input file</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"form-file-upload"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">class</span>=<span class="string">"file-upload"</span> <span class="attr">name</span>=<span class="string">"file"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"></div><div class="line">// progress</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"progress-bar"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里有两点要注意：1. <code>input[type=&quot;file&quot;]</code> 外层必须包裹 <code>form</code>; 2. 必须指定 <code>name=&quot;file&quot;</code>;</p>
+<h2 id="2、Code"><a href="#2、Code" class="headerlink" title="2、Code"></a>2、<code>Code</code></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fileUpload = $(<span class="string">'.file-upload'</span>),</div><div class="line">    progressBar = $(<span class="string">'.progress-bar'</span>);</div><div class="line">fileUpload.change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> formData = <span class="keyword">new</span> FormData($(<span class="string">'#form-file-upload'</span>)[<span class="number">0</span>]);</div><div class="line">  </div><div class="line">  $.ajax(&#123;</div><div class="line">    <span class="attr">url</span>: <span class="string">''</span>,</div><div class="line">    <span class="attr">type</span>: <span class="string">'POST'</span>,</div><div class="line">    <span class="attr">data</span>: formData,</div><div class="line">    <span class="attr">dataType</span>: <span class="string">'JSON'</span>,</div><div class="line">    <span class="attr">async</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">cache</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">contentType</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">processData</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">xhr</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> xhr = $.ajaxSettings.xhr();</div><div class="line">      xhr.upload.onloadstart = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'Upload start.'</span>);</div><div class="line">      &#125;;</div><div class="line">      xhr.upload.onprogress = onprogress;  <span class="comment">//上传progress调用方法</span></div><div class="line">      <span class="keyword">return</span> xhr;</div><div class="line">    &#125;,  </div><div class="line">    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'succ'</span>)</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'fail'</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 每隔一小段时间会调用这段方法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">onprogress</span>(<span class="params">evt</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> loaded = evt.loaded,</div><div class="line">      total = evt.total,</div><div class="line">      per = <span class="built_in">Math</span>.floor(<span class="number">100</span>*loaded/total);</div><div class="line">  progressBar.css(<span class="string">'width'</span> , per + <span class="string">'%'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试的时候可以在 <code>Chrome</code> - <code>F12</code> - <code>Network</code> 选择 <code>Regular 3G</code>，效果比较明显。<br>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+  </div>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Form/">Form</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Upload/">Upload</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/06/Canvas转Base64压缩并上传图片/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Canvas转Base64压缩并上传图片
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/07/表单验证常用正则表达式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">表单验证常用正则表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+      </main>
+      
+      
+        <aside class="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Frontend/">Frontend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/">Canvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Date/">Date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/">Document</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Explorer/">Explorer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Form/">Form</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrollbar/">Scrollbar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Text/">Text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Upload/">Upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Websocket/">Websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/14/mac下自定义命令/">Mac下自定义命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/11/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/09/文字无缝滚动/">文字无缝滚动跑马灯效果</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/31/获取浏览器窗口大小/">javascript学习003 -- 浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/26/Javascript学习002 -- array/">Javascript学习002 -- array</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container clearfix">
+        <div class="widget">
+            <h3>快速导航</h3>
+            <div class="links">
+                <a href="javascript:void(0);">HTML5中国</a>
+                <a href="javascript:void(0);">Bootstrap</a>
+                <a href="javascript:void(0);">ECharts</a>
+                <a href="javascript:void(0);">开发头条</a>
+                <a href="javascript:void(0);">TinyPNG</a>
+                <a href="javascript:void(0);">JSON校验</a>
+                <a href="javascript:void(0);">SegmentFault</a>
+                <a href="javascript:void(0);">在线Api</a>
+                <a href="javascript:void(0);">掘金</a>
+                <a href="javascript:void(0);">前端圈</a>
+                <a href="javascript:void(0);">前端里</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="copyright">
+            <p>Copyright&nbsp;&copy;&nbsp;<span class="iconfont icon-l"></span><span class="iconfont icon-u"></span><span class="iconfont icon-o"></span></p>
+            <p><i class="iconfont icon-wsmp-icprecord"></i>浙ICP备16021390号-1</p>
+            <p><i class="iconfont icon-gonganbeian"></i>浙公网安备33010502003302</p>
+        </div>
+
+    </div>
+</footer>
+  <script src="/js/zepto.min.js"></script>
+<script src="/js/luoym.js"></script>
+
+
+</body>
+</html>

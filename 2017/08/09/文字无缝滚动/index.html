@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon">
+  <meta name="author" content="luoyanming">
+  <meta name="email" content="13575458746@163.com">
+  <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
+  <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
+  
+  <title>文字无缝滚动跑马灯效果 | Luoym</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/luoym.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+        <a href="/" class="logo clearfix">
+            <i></i>
+            <p>
+                <span class="iconfont icon-l"></span>
+                <span class="iconfont icon-u"></span>
+                <span class="iconfont icon-o"></span>
+            </p>
+        </a>
+        <a href="javascript:void(0);" class="btn-nav">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar">
+    <div class="container">
+        <ul class="clearfix">
+            
+            <li>
+                <a href="/">
+                    <p>Home</p>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <p>Archives</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+  <section class="main-wrap">
+    <div class="container clearfix">
+      <main class="content">
+        <article id="post-文字无缝滚动" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      文字无缝滚动跑马灯效果
+    </h1>
+  
+
+        <a href="/2017/08/09/文字无缝滚动/" class="article-date">
+  <time datetime="2017-08-09T02:11:00.000Z" itemprop="datePublished">2017-08-09</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>项目中遇到文字无缝滚动的需求，本着快速开发的原则，网上找了几个插件，但都不理想，最后决定自己写一个简单的。<br><a id="more"></a></p>
+<h2 id="1、Html"><a href="#1、Html" class="headerlink" title="1、Html"></a>1、<code>Html</code></h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scroll"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>1. 设计模式与开发实践。<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>2. 习近平带领我们走过这不平凡的五年。<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>3. 深化改革砥砺前行。<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>4. 水果没有性别。<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">""</span>&gt;</span>5. 野猪双脏炮卡组攻略皇室战争传奇卡组推荐搭配。<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>.scroll</code> 是外层容器，<code>.scroll ul</code> 是具体滚动的容器。</p>
+<h2 id="2、Style"><a href="#2、Style" class="headerlink" title="2、Style"></a>2、<code>Style</code></h2><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.scroll</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;  <span class="comment">/* 必须有，不可删除 */</span></div><div class="line">    <span class="attribute">width</span>: <span class="number">1000px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</div><div class="line">    <span class="attribute">margin</span>: <span class="number">100px</span> auto;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#000</span>;</div><div class="line">    <span class="attribute">overflow</span>: hidden;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.scroll</span> <span class="selector-tag">ul</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">min-width</span>: <span class="number">1000px</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.scroll</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span>&#123;</div><div class="line">    <span class="attribute">float</span>: left;</div><div class="line">    <span class="attribute">height</span>: <span class="number">30px</span>;</div><div class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</div><div class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">15px</span>;</div><div class="line">    <span class="attribute">white-space</span>: nowrap;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.scroll</span> <span class="selector-tag">ul</span> <span class="selector-tag">li</span> <span class="selector-tag">a</span>&#123;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</div><div class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</div><div class="line">    <span class="attribute">text-decoration</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3、Javascript"><a href="#3、Javascript" class="headerlink" title="3、Javascript"></a>3、<code>Javascript</code></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> speed = <span class="number">100</span>,</div><div class="line">        scroll = $(<span class="string">'.scroll'</span>),</div><div class="line">        scrollWidth = scroll.outerWidth(), <span class="comment">// 外层容器宽度</span></div><div class="line">        scrollUL = scroll.find(<span class="string">'ul'</span>),</div><div class="line">        scrollLI = scrollUL.find(<span class="string">'li'</span>),</div><div class="line">        perLen = scrollLI.length, <span class="comment">// 所需滚动元素的个数</span></div><div class="line">        perWidth = <span class="number">0</span>; <span class="comment">// 所需滚动元素的总长度</span></div><div class="line"></div><div class="line">    <span class="keyword">var</span> that,</div><div class="line">        SCROLL = &#123;</div><div class="line">            <span class="attr">init</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                that = <span class="keyword">this</span>;</div><div class="line">                that.uiInit();</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">uiInit</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; perLen; i++) &#123;</div><div class="line">                    <span class="comment">// 计算所需滚动元素的总长度</span></div><div class="line">                    <span class="keyword">var</span> itemWidth = scrollLI.eq(i).outerWidth(<span class="literal">true</span>);</div><div class="line"></div><div class="line">                    perWidth += itemWidth;</div><div class="line">                &#125;</div><div class="line">                </div><div class="line">                <span class="keyword">if</span>(perWidth &gt; scrollWidth) &#123;</div><div class="line">                    <span class="comment">// 所需滚动距离大于外层容器宽度, clone元素</span></div><div class="line">                    scrollUL.css(<span class="string">'width'</span>, perWidth + <span class="string">'px'</span>);</div><div class="line"></div><div class="line">                    that.cloneLI();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">// 所需滚动距离小于外层容器宽度, 不做任何滚动处理</span></div><div class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">cloneLI</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="comment">// 滚动容器的宽度置为所需滚动元素总长度的2倍</span></div><div class="line">                scrollUL.css(<span class="string">'width'</span>, <span class="number">2</span> * perWidth + <span class="string">'px'</span>);</div><div class="line">                <span class="comment">// 克隆所有元素</span></div><div class="line">                scrollLI.clone().appendTo(scrollUL);</div><div class="line"></div><div class="line">                that.handleScrolling();</div><div class="line"></div><div class="line">                that.mouseOverBind();</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">handleScrolling</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="comment">// 定时器，每秒滚动speed px的距离</span></div><div class="line">                that.XF = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                    that.scrolling();</div><div class="line">                &#125;, <span class="number">1000</span>/speed);</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">scrolling</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                <span class="comment">// 获取滚动容器相对于外层容器的X轴偏移量</span></div><div class="line">                <span class="keyword">var</span> left = scrollUL.position().left;</div><div class="line"></div><div class="line">                <span class="keyword">if</span>(left &gt; -perWidth) &#123;</div><div class="line">                    <span class="comment">// 如果滚动距离小于所需滚动元素的总长度，滚动距离+1</span></div><div class="line">                    scrollUL.css(<span class="string">'left'</span>, (left - <span class="number">1</span>) + <span class="string">'px'</span>);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">// 滚动容器复位</span></div><div class="line">                    scrollUL.css(<span class="string">'left'</span>, <span class="number">0</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">mouseOverBind</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                scrollUL.on(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                    <span class="comment">// 鼠标hover时，清除滚动定时器</span></div><div class="line">                    clearInterval(that.XF);</div><div class="line">                &#125;);</div><div class="line"></div><div class="line">                scrollUL.on(<span class="string">'mouseout'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                    <span class="comment">// 鼠标blur时，重新设定计时器</span></div><div class="line">                    that.handleScrolling();</div><div class="line">                &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    SCROLL.init();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+  </div>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Text/">Text</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/11/WebSocket/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          WebSocket
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/31/获取浏览器窗口大小/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">javascript学习003 -- 浏览器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+      </main>
+      
+      
+        <aside class="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Frontend/">Frontend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/">Canvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Date/">Date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/">Document</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Explorer/">Explorer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Form/">Form</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrollbar/">Scrollbar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Text/">Text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Upload/">Upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Websocket/">Websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/14/mac下自定义命令/">Mac下自定义命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/11/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/09/文字无缝滚动/">文字无缝滚动跑马灯效果</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/31/获取浏览器窗口大小/">javascript学习003 -- 浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/26/Javascript学习002 -- array/">Javascript学习002 -- array</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container clearfix">
+        <div class="widget">
+            <h3>快速导航</h3>
+            <div class="links">
+                <a href="javascript:void(0);">HTML5中国</a>
+                <a href="javascript:void(0);">Bootstrap</a>
+                <a href="javascript:void(0);">ECharts</a>
+                <a href="javascript:void(0);">开发头条</a>
+                <a href="javascript:void(0);">TinyPNG</a>
+                <a href="javascript:void(0);">JSON校验</a>
+                <a href="javascript:void(0);">SegmentFault</a>
+                <a href="javascript:void(0);">在线Api</a>
+                <a href="javascript:void(0);">掘金</a>
+                <a href="javascript:void(0);">前端圈</a>
+                <a href="javascript:void(0);">前端里</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="copyright">
+            <p>Copyright&nbsp;&copy;&nbsp;<span class="iconfont icon-l"></span><span class="iconfont icon-u"></span><span class="iconfont icon-o"></span></p>
+            <p><i class="iconfont icon-wsmp-icprecord"></i>浙ICP备16021390号-1</p>
+            <p><i class="iconfont icon-gonganbeian"></i>浙公网安备33010502003302</p>
+        </div>
+
+    </div>
+</footer>
+  <script src="/js/zepto.min.js"></script>
+<script src="/js/luoym.js"></script>
+
+
+</body>
+</html>

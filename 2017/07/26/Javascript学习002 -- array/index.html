@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="css/images/favicon.ico" type="image/x-icon">
+  <meta name="author" content="luoyanming">
+  <meta name="email" content="13575458746@163.com">
+  <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
+  <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
+  
+  <title>Javascript学习002 -- array | Luoym</title>
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/luoym.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+        <a href="/" class="logo clearfix">
+            <i></i>
+            <p>
+                <span class="iconfont icon-l"></span>
+                <span class="iconfont icon-u"></span>
+                <span class="iconfont icon-o"></span>
+            </p>
+        </a>
+        <a href="javascript:void(0);" class="btn-nav">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+        </a>
+    </div>
+</header>
+
+<nav class="navbar">
+    <div class="container">
+        <ul class="clearfix">
+            
+            <li>
+                <a href="/">
+                    <p>Home</p>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <p>Archives</p>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+
+  <section class="main-wrap">
+    <div class="container clearfix">
+      <main class="content">
+        <article id="post-Javascript学习002 -- array" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Javascript学习002 -- array
+    </h1>
+  
+
+        <a href="/2017/07/26/Javascript学习002 -- array/" class="article-date">
+  <time datetime="2017-07-26T02:49:00.000Z" itemprop="datePublished">2017-07-26</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>Array</code> 数组的一些常用方法。<br><a id="more"></a></p>
+<h2 id="1、创建-Array"><a href="#1、创建-Array" class="headerlink" title="1、创建 Array"></a>1、创建 <code>Array</code></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建空数组</span></div><div class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line"><span class="keyword">var</span> arr = [];</div><div class="line"></div><div class="line"><span class="comment">// 创建长度为2的数组</span></div><div class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">2</span>);</div><div class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'luoym'</span>, <span class="string">'luoyanming'</span>);</div><div class="line"><span class="keyword">var</span> arr = [<span class="string">'luoym'</span>, <span class="string">'luoyanming'</span>];</div><div class="line">arr.length = <span class="number">4</span>;</div></pre></td></tr></table></figure>
+<h2 id="2、获取-Array-的值或属性"><a href="#2、获取-Array-的值或属性" class="headerlink" title="2、获取 Array 的值或属性"></a>2、获取 <code>Array</code> 的值或属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">'luoym'</span>, <span class="string">'luoyanming'</span>];</div><div class="line"></div><div class="line"><span class="comment">// 取值 </span></div><div class="line">arr[<span class="number">0</span>]; <span class="comment">// luoym</span></div><div class="line">arr[<span class="number">1</span>]; <span class="comment">// luoyanming</span></div><div class="line">arr[<span class="number">2</span>]; <span class="comment">// undefined</span></div><div class="line"></div><div class="line"><span class="comment">// 获取长度</span></div><div class="line">arr.length; <span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<h2 id="3、检测是否是-Array"><a href="#3、检测是否是-Array" class="headerlink" title="3、检测是否是 Array"></a>3、检测是否是 <code>Array</code></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Object</span>(),</div><div class="line">    b = <span class="keyword">new</span> <span class="built_in">Array</span>();</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(a <span class="keyword">instanceof</span> <span class="built_in">Array</span>); <span class="comment">// false</span></div><div class="line"><span class="built_in">console</span>.log(b <span class="keyword">instanceof</span> <span class="built_in">Array</span>); <span class="comment">// true</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(a)); <span class="comment">// false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(b)); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<h2 id="4、Array-和-String-之间相互转化"><a href="#4、Array-和-String-之间相互转化" class="headerlink" title="4、Array 和 String 之间相互转化"></a>4、<code>Array</code> 和 <code>String</code> 之间相互转化</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 数组转字符串</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>];</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(arr.join(<span class="string">'-'</span>)); <span class="comment">// 'a-b-c'</span></div><div class="line"><span class="built_in">console</span>.log(arr.join(<span class="string">','</span>)); <span class="comment">// 'a,b,c'</span></div><div class="line"></div><div class="line"><span class="comment">// 字符串转数组</span></div><div class="line"><span class="keyword">var</span> str1 = <span class="string">'a,b,c'</span>,</div><div class="line">    str2 = <span class="string">'a-b-c'</span>;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(str1.split(<span class="string">','</span>)); <span class="comment">// ['a', 'b', 'c']</span></div><div class="line"><span class="built_in">console</span>.log(str2.split(<span class="string">'-'</span>)); <span class="comment">// ['a', 'b', 'c']</span></div></pre></td></tr></table></figure>
+<h2 id="5、常用方法"><a href="#5、常用方法" class="headerlink" title="5、常用方法"></a>5、常用方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 栈方法（后进先出 Last-In-First-Out）</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>];</div><div class="line"></div><div class="line">arr.push(<span class="string">'c'</span>); <span class="comment">// ['a', 'b', 'c'] 推入一项到数组末尾</span></div><div class="line">arr.length; <span class="comment">// 3</span></div><div class="line">arr.pop(); <span class="comment">// 'c' 获取数组最后一项</span></div><div class="line">arr.length; <span class="comment">// 2</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 队列方法（先进先出 First-In-First-Out）</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>, <span class="string">'b'</span>];</div><div class="line"></div><div class="line">arr.push(<span class="string">'c'</span>); <span class="comment">// ['a', 'b', 'c'] 推入一项到数组末尾</span></div><div class="line">arr.length; <span class="comment">// 3</span></div><div class="line">arr.shift(); <span class="comment">// 'a' 获取数组第一项</span></div><div class="line">arr.length; <span class="comment">// 2</span></div><div class="line">arr.unshift(<span class="string">'d'</span>); <span class="comment">// ['d','b', 'c'] 在数组前端添加一项</span></div><div class="line">arr.lengtgh; <span class="comment">// 3</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 重排序方法（将数组的值转成string进行比较）</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line">arr.reverse(); <span class="comment">// [5, 4, 1, 2, 3]; 反转顺序</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>];</div><div class="line">arr.sort(); <span class="comment">// [0, 1, 10, 15, 5]; 升序排列</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 操作方法</span></div><div class="line"><span class="keyword">var</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],</div><div class="line">    arr2 = [<span class="number">3</span>, <span class="number">4</span>];</div><div class="line"></div><div class="line">arr1.concat(arr2); <span class="comment">// [1, 2, 3, 4, 5, 3, 4] 合并2个数组，简单添加到末尾生成新数组, arr1的值保持不变</span></div><div class="line">arr1.slice(<span class="number">1</span>); <span class="comment">// [2, 3, 4, 5] 截取数组，从下标为1的点开始，原数组arr1值保持不变</span></div><div class="line">arr1.slice(<span class="number">1</span>, <span class="number">4</span>); <span class="comment">// [2, 3, 4] 第一个参数表示起始位置（包含起始位置），第二个参数表示结束位置（不包括结束位置）</span></div><div class="line">arr1.slice(<span class="number">-3</span>, <span class="number">-2</span>); <span class="comment">// [3] 若参数是负数，则将参数和数组长度5相加，等价于arr1.slice(2, 3); </span></div><div class="line">arr1.splice(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// [2, 3] 从起始位置1开始删除2项，返回删除元素的集合，arr1的值变成[1,4,5]</span></div><div class="line"><span class="built_in">console</span>.log(arr1); <span class="comment">// [1, 4, 5]</span></div><div class="line">arr1.splice(<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>); <span class="comment">// [4] 从起始位置1开始删除1项，返回删除元素的集合，并在删除位置添加3个元素，arr1的值变成[1,3,3,3,5]   </span></div><div class="line"><span class="built_in">console</span>.log(arr1); <span class="comment">// [1, 3, 3, 3, 5]</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 位置方法</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</div><div class="line">arr.indexOf(<span class="number">2</span>); <span class="comment">// 1 从开头位置查找值2是否存在，若存在，返回该值的索引 1</span></div><div class="line">arr.indexOf(<span class="number">7</span>); <span class="comment">// -1 若不存在，则返回 -1</span></div><div class="line">arr.lastIndexOf(<span class="number">2</span>); <span class="comment">// 1 从末尾位置开始查找</span></div><div class="line">arr.indexOf(<span class="number">5</span>, <span class="number">3</span>); <span class="comment">// 4 从数组索引为 3 的位置开始产找值 5 是否存在</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 迭代方法</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>];</div><div class="line"></div><div class="line"><span class="keyword">var</span> everyResult = arr.every(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (item &lt; <span class="number">2</span>); <span class="comment">// 判断是否满足函数条件 &lt; 2，若满足，继续循环，若不满足，跳出循环。所有元素都满足时，返回true，否则返回false。</span></div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(everyResult); <span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> someResult = arr.some(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (item &lt; <span class="number">2</span>); <span class="comment">// 判断是否满足函数条件 &lt; 2，若满足，跳出循环，若不满足，继续循环。只要有一个元素满足时，就返回true，所有都不满足则返回false。</span></div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(someResult); <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> filterResult = arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> (item &lt; <span class="number">2</span>); <span class="comment">// 在返回的数组中包含满足判断条件的项</span></div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(filterResult); <span class="comment">// [1, 1]</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> mapResult = arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> item * <span class="number">2</span>; <span class="comment">// 在返回的数组中包含函数运行后的项</span></div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(mapResult); <span class="comment">// [2, 4, 6, 8, 10, 8, 6, 4, 2]</span></div><div class="line"></div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>) </span>&#123;</div><div class="line">    <span class="comment">// 执行某些操作，类似for循环</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 归并方法</span></div><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</div><div class="line"><span class="keyword">var</span> sum = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, cur, index, array</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> prev + cur;</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(sum); <span class="comment">// 15</span></div><div class="line"><span class="comment">// reduce 从头开始遍历数组</span></div><div class="line"><span class="comment">// reduceRight 从末尾开始遍历数组</span></div></pre></td></tr></table></figure>
+<p>&nbsp;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
+  </div>
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/31/获取浏览器窗口大小/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          javascript学习003 -- 浏览器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/18/如何使用网易云信创建聊天窗口/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何使用网易云信创建聊天窗口</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+      </main>
+      
+      
+        <aside class="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Frontend/">Frontend</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ajax/">Ajax</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS/">CSS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Canvas/">Canvas</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Date/">Date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Document/">Document</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Explorer/">Explorer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Form/">Form</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/H5/">H5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSONP/">JSONP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scrollbar/">Scrollbar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Text/">Text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Upload/">Upload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Websocket/">Websocket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/14/mac下自定义命令/">Mac下自定义命令</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/11/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/09/文字无缝滚动/">文字无缝滚动跑马灯效果</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/31/获取浏览器窗口大小/">javascript学习003 -- 浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/26/Javascript学习002 -- array/">Javascript学习002 -- array</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <div class="container clearfix">
+        <div class="widget">
+            <h3>快速导航</h3>
+            <div class="links">
+                <a href="javascript:void(0);">HTML5中国</a>
+                <a href="javascript:void(0);">Bootstrap</a>
+                <a href="javascript:void(0);">ECharts</a>
+                <a href="javascript:void(0);">开发头条</a>
+                <a href="javascript:void(0);">TinyPNG</a>
+                <a href="javascript:void(0);">JSON校验</a>
+                <a href="javascript:void(0);">SegmentFault</a>
+                <a href="javascript:void(0);">在线Api</a>
+                <a href="javascript:void(0);">掘金</a>
+                <a href="javascript:void(0);">前端圈</a>
+                <a href="javascript:void(0);">前端里</a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="copyright">
+            <p>Copyright&nbsp;&copy;&nbsp;<span class="iconfont icon-l"></span><span class="iconfont icon-u"></span><span class="iconfont icon-o"></span></p>
+            <p><i class="iconfont icon-wsmp-icprecord"></i>浙ICP备16021390号-1</p>
+            <p><i class="iconfont icon-gonganbeian"></i>浙公网安备33010502003302</p>
+        </div>
+
+    </div>
+</footer>
+  <script src="/js/zepto.min.js"></script>
+<script src="/js/luoym.js"></script>
+
+
+</body>
+</html>
