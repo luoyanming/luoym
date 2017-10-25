@@ -14,7 +14,7 @@
   <meta name="description" content="luoym的个人博客（www.luoym.com）,记录WEB前端学习过程中的点滴！">
   <meta name="keywords" content="luoym,前端开发,代码,程序员,web前端,blog,博客,html,html5,css,css3,js,javascript,jquery,gulp,scss,sass,插件">
   
-  <title>Archives: 2017 | Luoym</title>
+  <title>浏览器全屏缩放、判断是否全屏 | Luoym</title>
 
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/luoym.css">
@@ -61,215 +61,60 @@
   <section class="main-wrap">
     <div class="container clearfix">
       <main class="content">
+        <article id="post-浏览器全屏缩放、判断是否全屏" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
         
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/25/浏览器全屏缩放、判断是否全屏/" class="archive-article-date">
-  <time datetime="2017-10-25T09:01:49.000Z" itemprop="datePublished">Oct 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/25/浏览器全屏缩放、判断是否全屏/">浏览器全屏缩放、判断是否全屏</a>
+    <h1 class="article-title" itemprop="name">
+      浏览器全屏缩放、判断是否全屏
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/14/mac下自定义命令/" class="archive-article-date">
-  <time datetime="2017-08-14T10:18:00.000Z" itemprop="datePublished">Aug 14</time>
+        <a href="/2017/10/25/浏览器全屏缩放、判断是否全屏/" class="article-date">
+  <time datetime="2017-10-25T09:01:49.000Z" itemprop="datePublished">2017-10-25</time>
 </a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/14/mac下自定义命令/">Mac下自定义命令</a>
-    </h1>
-  
+        <p>本章介绍下如何用 <code>Javascript</code> 进行页面全屏缩放。<br><a id="more"></a></p>
+<h2 id="1、判断页面是否是全屏"><a href="#1、判断页面是否是全屏" class="headerlink" title="1、判断页面是否是全屏"></a>1、判断页面是否是全屏</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> explorer = <span class="built_in">window</span>.navigator.userAgent.toLowerCase();</div><div class="line"></div><div class="line"><span class="keyword">if</span>(explorer.indexOf(<span class="string">'chrome'</span>) &gt; <span class="number">0</span>) &#123;</div><div class="line">    <span class="comment">// webkit</span></div><div class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>.body.scrollHeight === <span class="built_in">window</span>.screen.height &amp;&amp; <span class="built_in">document</span>.body.scrollWidth === <span class="built_in">window</span>.screen.width) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">// IE 9+  fireFox</span></div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.outerHeight === <span class="built_in">window</span>.screen.height &amp;&amp; <span class="built_in">window</span>.outerWidth === <span class="built_in">window</span>.screen.width) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="页面展示全屏"><a href="#页面展示全屏" class="headerlink" title="页面展示全屏"></a>页面展示全屏</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">launchFullscreen: <span class="function"><span class="keyword">function</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(element.requestFullscreen) &#123;</div><div class="line">        element.requestFullscreen();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(element.mozRequestFullScreen) &#123;</div><div class="line">        element.mozRequestFullScreen();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(element.webkitRequestFullscreen) &#123;</div><div class="line">        element.webkitRequestFullscreen();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(element.msRequestFullscreen) &#123;</div><div class="line">        element.msRequestFullscreen();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3、页面取消全屏"><a href="#3、页面取消全屏" class="headerlink" title="3、页面取消全屏"></a>3、页面取消全屏</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cancleFullscreen: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.exitFullscreen) &#123;</div><div class="line">        <span class="built_in">document</span>.exitFullscreen();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">document</span>.mozCancelFullScreen) &#123;</div><div class="line">        <span class="built_in">document</span>.mozCancelFullScreen();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">document</span>.webkitExitFullscreen) &#123;</div><div class="line">        <span class="built_in">document</span>.webkitExitFullscreen();</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">document</span>.msExitFullscreen) &#123;</div><div class="line">        <span class="built_in">document</span>.msExitFullscreen();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&nbsp;</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/11/WebSocket/" class="archive-article-date">
-  <time datetime="2017-08-11T06:34:00.000Z" itemprop="datePublished">Aug 11</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/11/WebSocket/">WebSocket</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/09/文字无缝滚动/" class="archive-article-date">
-  <time datetime="2017-08-09T02:11:00.000Z" itemprop="datePublished">Aug 9</time>
-</a>
+    </div>
+    <footer class="article-footer">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/09/文字无缝滚动/">文字无缝滚动跑马灯效果</a>
-    </h1>
-  
-
-    </header>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Frontend/">Frontend</a>
   </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/31/获取浏览器窗口大小/" class="archive-article-date">
-  <time datetime="2017-07-31T02:12:00.000Z" itemprop="datePublished">Jul 31</time>
-</a>
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/31/获取浏览器窗口大小/">javascript学习003 -- 浏览器</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/14/mac下自定义命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mac下自定义命令</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/26/Javascript学习002 -- array/" class="archive-article-date">
-  <time datetime="2017-07-26T02:49:00.000Z" itemprop="datePublished">Jul 26</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/26/Javascript学习002 -- array/">Javascript学习002 -- array</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/18/如何使用网易云信创建聊天窗口/" class="archive-article-date">
-  <time datetime="2017-07-18T08:23:00.000Z" itemprop="datePublished">Jul 18</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/18/如何使用网易云信创建聊天窗口/">如何使用网易云信创建聊天窗口</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/11/Javascript学习001 -- script元素/" class="archive-article-date">
-  <time datetime="2017-07-11T07:43:00.000Z" itemprop="datePublished">Jul 11</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/11/Javascript学习001 -- script元素/">Javascript学习001 -- script元素</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/07/06/跨域/" class="archive-article-date">
-  <time datetime="2017-07-06T01:48:00.000Z" itemprop="datePublished">Jul 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/06/跨域/">跨域</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/06/30/JSON和JSON格式字符串相互转化/" class="archive-article-date">
-  <time datetime="2017-06-30T02:56:00.000Z" itemprop="datePublished">Jun 30</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/30/JSON和JSON格式字符串相互转化/">JSON和JSON格式字符串相互转化</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2017/page/2/">2</a><a class="page-number" href="/archives/2017/page/3/">3</a><a class="extend next" rel="next" href="/archives/2017/page/2/">__('next') &raquo;</a>
-  </nav>
 
       </main>
       
